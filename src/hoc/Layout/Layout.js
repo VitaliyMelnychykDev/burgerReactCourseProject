@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import Aox from '../../hoc/Aox';
+import Aox from '../Aox/Aox';
 import classes from './Layout.css';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDraw from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDraw from '../../components/Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component {
 

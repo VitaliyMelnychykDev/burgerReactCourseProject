@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Aox from '../../hoc/Aox';
+import Aox from '../../hoc/Aox/Aox';
 import Burger from '../../components/Burger/Burger'
 import BuildControlls from '../../components/Burger/BuildControlls/BuildControlls';
 import * as Ingredient from '../../components/Burger/BurgerIngredient/BurgerIngredientsInfos';

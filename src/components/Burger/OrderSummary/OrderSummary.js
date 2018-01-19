@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Aox from '../../../hoc/Aox';
+import Aox from '../../../hoc/Aox/Aox';
 import Button from '../../UI/Button/Button'
 
 const orderSummary = (props) => {
@@ -12,7 +12,7 @@ const orderSummary = (props) => {
                     <span style={{textTransform: 'capitalize'}}>{igKey}</span>: {props.ingredients[igKey]}
                 </li>);
         });
-    
+
     return (
         <Aox>
             <h3>Your Order</h3>
