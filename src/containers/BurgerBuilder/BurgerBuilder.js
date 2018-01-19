@@ -4,8 +4,8 @@ import Aox from '../../hoc/Aox';
 import Burger from '../../components/Burger/Burger'
 import BuildControlls from '../../components/Burger/BuildControlls/BuildControlls';
 import * as Ingredient from '../../components/Burger/BurgerIngredient/BurgerIngredientsInfos';
-
-const sfds = 'sdsffg';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {};
 INGREDIENT_PRICES[Ingredient.SALAD] = 0.5;
@@ -19,7 +19,9 @@ class BurgerBuilder extends Component {
         this.state = {
             ingredients: {
             },
-            totalPrice: 4
+            totalPrice: 4,
+            purchasable: false,
+            purchasing:  false
         };
 
         this.state.ingredients[Ingredient.SALAD] = 0;
@@ -43,6 +45,7 @@ class BurgerBuilder extends Component {
             ingredients: updatedIngredients,
             totalPrice: newPrice
         });
+        this.updatePurchaseState(updatedIngredients);
     }
 
     removeIngredientHandler = (type) => {
@@ -63,6 +66,27 @@ class BurgerBuilder extends Component {
             ingredients: updatedIngredients,
             totalPrice: newPrice
         });
+        this.updatePurchaseState(updatedIngredients);
+    }
+
+    updatePurchaseState(ingredients) {
+        const sum = Object.keys(ingredients)
+            .map(igKey => {
+                return ingredients[igKey];
+            })
+            .reduce((sum, el) => {
+                return sum + el;
+            }, 0);
+
+        this.setState({
+            purchasable: sum > 0
+        });
+    }
+
+    purchaseHandler = () => {
+        this.setState({
+            purchasing:true
+        });
     }
 
     render () {
@@ -74,9 +98,15 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aox>
+                <Modal show={this.state.purchasing}>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControlls
+                    ordered={this.purchaseHandler}
                     disabled={disabledInfo}
+                    purchasable={this.state.purchasable}
+                    price={this.state.totalPrice}
                     ingredientRemoved={this.removeIngredientHandler}
                     ingredientAdded={this.addIngredientHandler} />
             </Aox>
