@@ -35,6 +35,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
+
         axios.get('https://react-burger-df427.firebaseio.com/ingredients.json')
             .then(response => {
                 this.setState({ingredients: response.data});
@@ -109,7 +110,7 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({
+        /*this.setState({
             loading: true
         });
         const order = {
@@ -138,7 +139,17 @@ class BurgerBuilder extends Component {
                     loading: false,
                     purchasing: false
                 });
-            });
+            });*/
+        const queryParams= [];
+        for(let i in this .state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+        }
+
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
     render () {
         const disabledInfo = {
