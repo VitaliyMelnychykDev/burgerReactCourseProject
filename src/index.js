@@ -6,10 +6,17 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './store/reducer';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import orderReducer from './store/reducers/order';
+import thunk from 'redux-thunk';
 
-const store = createStore(reducer);
+const reducer = combineReducers({
+    burgerBuilder: burgerBuilderReducer,
+    order: orderReducer
+});
+
+const store = createStore(reducer, applyMiddleware(thunk));
 
 const app = (
     <Provider store={store}>
