@@ -12,11 +12,10 @@ const sideDrawer = (props) => {
     if(props.open) {
         attechecedClasses = [classes.SideDrawer, classes.Open]
     }
-
     return (
         <Aox>
             <BackDrop show={props.open} clicked={props.closed} />
-            <div className={attechecedClasses.join(' ')}>
+            <div className={attechecedClasses.join(' ')} onClick={props.closed}>
                 <div className={classes.Logo}>
                     <Logo />
                 </div>
