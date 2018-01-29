@@ -18,7 +18,7 @@ INGREDIENT_PRICES[Ingredient.CHEESE] = 0.4;
 INGREDIENT_PRICES[Ingredient.MEAT] = 1.3;
 INGREDIENT_PRICES[Ingredient.BACON] = 0.7;
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,7 +48,7 @@ class BurgerBuilder extends Component {
                 purchasing:true
             });
         } else {
-            this.props.onSetAuthRedirectPath('/checkout');
+            this.props.onSetAuthRedirectPath('')
             this.props.history.push('/auth');
         }
     }
