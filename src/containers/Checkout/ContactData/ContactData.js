@@ -7,6 +7,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/WithErrorHandler/WithErrorHandler';
 import * as actions from '../../../store/actions/index';
+import { checkValidity } from '../../../share/validation'
 
 class ContactData extends Component {
     state = {
@@ -116,7 +117,7 @@ class ContactData extends Component {
         const updatedFormElement = { ...updatedOrderForm[inputIdentifier]};
         updatedFormElement.value = event.target.value;
         if(updatedFormElement.validation) {
-            updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+            updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         }
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
@@ -133,16 +134,6 @@ class ContactData extends Component {
             orderForm: updatedOrderForm,
             formIsValid: formIsValid
         });
-    }
-
-    checkValidity = (value, rules) => {
-        let isValid = false;
-
-        if (rules.required) {
-            isValid = value.trim() !== '';
-        }
-
-        return isValid;
     }
 
     render() {
