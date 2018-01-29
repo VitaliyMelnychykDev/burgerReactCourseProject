@@ -50,13 +50,18 @@ export const auth = (email, password, isSignUp) => {
         }
         axios.post(url, authData)
             .then(response => {
-                console.log(response);
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(err => {
-                console.log(err);
                 dispatch(authFail(err.response.data.error));
             })
+    }
+}
+
+export const setAuthRedirectPath = (path) => {
+    return {
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        path: path
     }
 }

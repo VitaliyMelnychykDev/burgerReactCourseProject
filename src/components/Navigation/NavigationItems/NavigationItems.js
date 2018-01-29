@@ -6,7 +6,7 @@ const navigationItems = (props) => {
     return (
         <ul className={classes.NavigationItems}>
             <NavigationItem link='/' exact>Burger Builder</NavigationItem>
-            <NavigationItem link='/orders'>Orders</NavigationItem>
+            {props.iaAuth ? <NavigationItem link='/orders'>Orders</NavigationItem> : null }
             {props.iaAuth
                 ? <NavigationItem link='/logout'>Logout</NavigationItem>
                 : <NavigationItem link='/auth'>Auth</NavigationItem>
